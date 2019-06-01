@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import './App.css';
 import Form from "./components/Form";
+import Recipes from "./components/Recipes";
+
 
 const API_KEY ="5e1f6a24745f7a035ef173d68573b199";
 class App extends Component {
@@ -16,8 +18,9 @@ class App extends Component {
     console.log("working !!!");
     
     const data = await api_call.json();
+    console.log(data);
     this.setState({recipes: data.recipes});
-   console.log(this.state.recipes);
+    console.log(this.state.recipes);
   }
   render() {
     return (
@@ -26,8 +29,8 @@ class App extends Component {
           <h1 className="App-title">Recipe Search</h1>
         </header>
         <Form getRecipe={this.getRecipe} />
-    {this.state.recipes.map((recipe)=>{return <p key={recipe.recipe_id}>{recipe.title}</p>})}
-        </div>
+        <Recipes recipes={this.state.recipes} />        
+      </div>
     );
   }
 }
